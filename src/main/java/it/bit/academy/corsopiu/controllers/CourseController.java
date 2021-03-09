@@ -1,7 +1,9 @@
 package it.bit.academy.corsopiu.controllers;
 
 import it.bit.academy.corsopiu.dtos.CourseDto;
+import it.bit.academy.corsopiu.dtos.CourseEditionDto;
 import it.bit.academy.corsopiu.entities.Course;
+import it.bit.academy.corsopiu.entities.CourseEdition;
 import it.bit.academy.corsopiu.services.abstractions.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +38,7 @@ public class CourseController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/coursebyid/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CourseDto> findCourseById(@PathVariable long id){
         Optional<Course> opt = schedulerService.getCourseById(id);
         if(opt.isEmpty()){
@@ -44,5 +46,31 @@ public class CourseController {
         }
         return new ResponseEntity<>(new CourseDto(opt.get()), HttpStatus.OK);
     }
+
+    @GetMapping("/editions/{id}")
+    public ResponseEntity<Collection<CourseEditionDto>> findEditionById(@PathVariable long id){
+        Collection<CourseEdition> opt = schedulerService.getCourseEditions(id);
+        if(opt.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        List<CourseEditionDto> result = opt.stream().map(CourseEditionDto::new).collect(Collectors.toList());
+        return new ResponseEntity<>(result, HttpStatus.OK);
+
+    }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<CourseDto> findCourseEditionModuleById(@PathVariable long id){
+//
+//        Optional<Course> opt = schedulerService.getCourseById(id);
+////        Collection<CourseEdition> courseEditions = ;
+////        Collection<Module> module =  ;
+////        OggettoTuttoInsieme result =  (castare a OggettoTuttoInsieme) opt + "/" + courseEditions + "/" + module;
+////        result result;
+//        if(opt.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(new CourseDto(opt.get()), HttpStatus.OK);
+//    }
+
 
 }
