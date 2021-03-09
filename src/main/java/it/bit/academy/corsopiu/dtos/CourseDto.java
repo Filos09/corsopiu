@@ -1,6 +1,10 @@
 package it.bit.academy.corsopiu.dtos;
 
 import it.bit.academy.corsopiu.entities.Course;
+import it.bit.academy.corsopiu.entities.CourseEdition;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CourseDto {
 
@@ -11,6 +15,7 @@ public class CourseDto {
     private String program;
     private boolean certification;
     private String category;
+    private List<CourseEditionDto> editions;
 
     public CourseDto(Course course) {
         this.id = course.getId();
@@ -20,6 +25,7 @@ public class CourseDto {
         this.program = course.getProgram();
         this.certification = course.isCertification();
         this.category = course.getCategory();
+        this.editions = course.getEditions().stream().map(CourseEditionDto::new).collect(Collectors.toList());
     }
 
     public long getId() {

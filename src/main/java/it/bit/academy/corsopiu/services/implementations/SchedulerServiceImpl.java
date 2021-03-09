@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class SchedulerServiceImpl implements SchedulerService {
@@ -21,5 +22,11 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public Collection<Course> getCourses() {
         return (Collection<Course>) this.courseRepo.findAll();
+    }
+
+    @Override
+    public Optional<Course> getCourseById(long id) {
+        Optional<Course> course = this.courseRepo.findById(id);
+        return course;
     }
 }
