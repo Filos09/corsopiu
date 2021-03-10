@@ -3,9 +3,11 @@ package it.bit.academy.corsopiu.controllers;
 import it.bit.academy.corsopiu.dtos.CourseDto;
 import it.bit.academy.corsopiu.dtos.CourseEditionDto;
 import it.bit.academy.corsopiu.dtos.EditionModuleDto;
+import it.bit.academy.corsopiu.dtos.PersonDto;
 import it.bit.academy.corsopiu.entities.Course;
 import it.bit.academy.corsopiu.entities.CourseEdition;
 import it.bit.academy.corsopiu.entities.Module;
+import it.bit.academy.corsopiu.entities.Person;
 import it.bit.academy.corsopiu.services.abstractions.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/course")
+@RequestMapping("/api/person")
 @CrossOrigin
 public class CourseController {
 
@@ -70,20 +72,5 @@ public class CourseController {
         List<EditionModuleDto> result = opt.stream().map(EditionModuleDto::new).collect(Collectors.toList());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
-//    @GetMapping("/{id}")
-//    public ResponseEntity<CourseDto> findCourseEditionModuleById(@PathVariable long id){
-//
-//        Optional<Course> opt = schedulerService.getCourseById(id);
-////        Collection<CourseEdition> courseEditions = ;
-////        Collection<Module> module =  ;
-////        OggettoTuttoInsieme result =  (castare a OggettoTuttoInsieme) opt + "/" + courseEditions + "/" + module;
-////        result result;
-//        if(opt.isEmpty()){
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<>(new CourseDto(opt.get()), HttpStatus.OK);
-//    }
-
 
 }

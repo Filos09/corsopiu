@@ -3,9 +3,11 @@ package it.bit.academy.corsopiu.services.implementations;
 import it.bit.academy.corsopiu.entities.Course;
 import it.bit.academy.corsopiu.entities.CourseEdition;
 import it.bit.academy.corsopiu.entities.Module;
+import it.bit.academy.corsopiu.entities.Person;
 import it.bit.academy.corsopiu.repositories.CourseRepository;
 import it.bit.academy.corsopiu.repositories.EditionRepository;
 import it.bit.academy.corsopiu.repositories.ModuleRepository;
+import it.bit.academy.corsopiu.repositories.PersonRepository;
 import it.bit.academy.corsopiu.services.abstractions.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +24,17 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     private ModuleRepository moduleRepo;
 
+    private PersonRepository personRepo;
+
     @Autowired
-    public SchedulerServiceImpl(CourseRepository courseRepo, EditionRepository editionRepo, ModuleRepository moduleRepo) {
+    public SchedulerServiceImpl(CourseRepository courseRepo,
+                                EditionRepository editionRepo,
+                                ModuleRepository moduleRepo,
+                                PersonRepository personRepo) {
         this.courseRepo = courseRepo;
         this.editionRepo = editionRepo;
         this.moduleRepo = moduleRepo;
+        this.personRepo = personRepo;
     }
 
     @Override
@@ -50,6 +58,12 @@ public class SchedulerServiceImpl implements SchedulerService {
     public Collection<Module> getModules(long id) {
         Collection<Module> modules = this.moduleRepo.findByEditionId(id);
         return modules;
+    }
+
+    @Override
+    public Optional<Person> getPersonByEmail(String email) {
+        Optional<Person> person = this.personRepo.findByEmail(email);
+        return person;
     }
 
 }
