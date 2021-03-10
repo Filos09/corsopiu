@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/person")
+@RequestMapping("/api/course")
 @CrossOrigin
 public class CourseController {
 

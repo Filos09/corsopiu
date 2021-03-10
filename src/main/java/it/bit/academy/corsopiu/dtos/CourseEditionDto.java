@@ -6,6 +6,7 @@ import it.bit.academy.corsopiu.entities.Module;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CourseEditionDto {
 
@@ -20,6 +21,8 @@ public class CourseEditionDto {
         tutorId = c.getTutor().getId();
         tutorName = c.getTutor().getFirstName() + " " + c.getTutor().getLastName();
         courseId = c.getCourse().getId();
+        this.modules = c.getModules().stream().map(EditionModuleDto::new).collect(Collectors.toList());
+
     }
 
     private long id;
@@ -37,6 +40,16 @@ public class CourseEditionDto {
     private String tutorName;
 
     private long courseId;
+
+    public List<EditionModuleDto> getModules() {
+        return modules;
+    }
+
+    public void setModules(List<EditionModuleDto> modules) {
+        this.modules = modules;
+    }
+
+    private List<EditionModuleDto> modules;
 
     public long getId() {
         return id;

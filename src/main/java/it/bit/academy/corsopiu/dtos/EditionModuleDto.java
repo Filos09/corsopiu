@@ -15,7 +15,7 @@ public class EditionModuleDto {
     private String description;
     private String teacherName;
     private int duration;
-    private long editionID;
+    private long editionId;
 
     public EditionModuleDto(){}
 
@@ -25,7 +25,7 @@ public class EditionModuleDto {
         description = m.getDescription();
         teacherName = m.getTeacher().getFirstName() +" "+m.getTeacher().getLastName();
         duration = m.getDuration();
-        editionID = m.getEdition().getId();
+        editionId = m.getEdition().getId();
     }
 
 
@@ -70,11 +70,11 @@ public class EditionModuleDto {
         this.duration = duration;
     }
 
-    public long getEditionID() {
-        return editionID;
+    public long getEditionId() {
+        return editionId;
     }
 
-    public void setEditionID(long editionID) {
-        this.editionID = editionID;
+    public void setEditionId(long editionID) {
+        this.editionId = editionID;
     }
 }
