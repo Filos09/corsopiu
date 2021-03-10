@@ -2,8 +2,10 @@ package it.bit.academy.corsopiu.services.implementations;
 
 import it.bit.academy.corsopiu.entities.Course;
 import it.bit.academy.corsopiu.entities.CourseEdition;
+import it.bit.academy.corsopiu.entities.Module;
 import it.bit.academy.corsopiu.repositories.CourseRepository;
 import it.bit.academy.corsopiu.repositories.EditionRepository;
+import it.bit.academy.corsopiu.repositories.ModuleRepository;
 import it.bit.academy.corsopiu.services.abstractions.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +20,13 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     private EditionRepository editionRepo;
 
+    private ModuleRepository moduleRepo;
+
     @Autowired
-    public SchedulerServiceImpl(CourseRepository courseRepo, EditionRepository editionRepo) {
+    public SchedulerServiceImpl(CourseRepository courseRepo, EditionRepository editionRepo, ModuleRepository moduleRepo) {
         this.courseRepo = courseRepo;
         this.editionRepo = editionRepo;
+        this.moduleRepo = moduleRepo;
     }
 
     @Override
@@ -39,6 +44,12 @@ public class SchedulerServiceImpl implements SchedulerService {
     public Collection<CourseEdition> getCourseEditions(long id) {
         Collection<CourseEdition> editions = this.editionRepo.findTop3ByCourseIdOrderByIdDesc(id);
         return editions;
+    }
+
+    @Override
+    public Collection<Module> getModules(long id) {
+        Collection<Module> modules = this.moduleRepo.findByEditionId(id);
+        return modules;
     }
 
 }
