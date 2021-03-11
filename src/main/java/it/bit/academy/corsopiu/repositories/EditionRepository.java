@@ -9,7 +9,8 @@ import java.util.Collection;
 
 public interface EditionRepository extends CrudRepository<CourseEdition,Long> {
 
-    Collection<CourseEdition> findTop3ByCourseIdOrderByIdDesc(long id);
+//    Collection<CourseEdition> findTop3ByCourseIdOrderByIdDesc(long id);
+Collection<CourseEdition> findAllByCourseIdOrderByIdDesc(long id);
 //
     Collection<CourseEdition> findAllById(long id);
 

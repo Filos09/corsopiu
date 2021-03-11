@@ -50,7 +50,8 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     @Override
     public Collection<CourseEdition> getCourseEditions(long id) {
-        Collection<CourseEdition> editions = this.editionRepo.findTop3ByCourseIdOrderByIdDesc(id);
+//        Collection<CourseEdition> editions = this.editionRepo.findTop3ByCourseIdOrderByIdDesc(id);
+        Collection<CourseEdition> editions = this.editionRepo.findAllByCourseIdOrderByIdDesc(id);
         return editions;
     }
 

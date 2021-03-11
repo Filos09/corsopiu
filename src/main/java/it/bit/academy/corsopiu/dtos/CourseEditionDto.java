@@ -4,6 +4,7 @@ import it.bit.academy.corsopiu.entities.*;
 import it.bit.academy.corsopiu.entities.Module;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ public class CourseEditionDto {
 
     public CourseEditionDto(CourseEdition c){
         id = c.getId();
-        startDate = c.getStartDate();
+        startDate = c.getStartDate().toLocalDate();
         classroomId = c.getClassroom().getId();
         classroomName = c.getClassroom().getName();
         description = c.getDescription();
@@ -27,7 +28,7 @@ public class CourseEditionDto {
 
     private long id;
 
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     private long classroomId;     // aula in cui si svolge il corso
 
@@ -59,11 +60,11 @@ public class CourseEditionDto {
         this.id = id;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 

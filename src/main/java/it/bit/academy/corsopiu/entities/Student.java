@@ -8,11 +8,11 @@ import java.util.List;
 @DiscriminatorValue("STUD")
 public class Student extends Person {
 
-    public Student(String name, String surname, Gender gender) {
-
-        super(name, surname, gender);
-
-    }
+//    public Student(String name, String surname, Gender gender) {
+//
+//        super(name, surname, gender);
+//
+//    }
 
     @OneToMany(mappedBy = "student",
             fetch = FetchType.LAZY,

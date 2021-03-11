@@ -58,6 +58,7 @@ public class CourseController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         List<CourseEditionDto> result = opt.stream().map(CourseEditionDto::new).collect(Collectors.toList());
+
         return new ResponseEntity<>(result, HttpStatus.OK);
 
     }
