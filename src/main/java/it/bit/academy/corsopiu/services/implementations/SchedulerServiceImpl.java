@@ -70,10 +70,56 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     @Override
     public String createSearchString(InfoRicercaCorsi infoRicercaCorsi){
-       String base = "SELECT c FROM Course c ";
-       if(infoRicercaCorsi.getHasPrice()){
-           base += "WHERE c.price > 0";
+       String base = "SELECT c FROM Course c";
+       boolean hasWhere = false;
+
+       if(infoRicercaCorsi.getHasPrice() != null && infoRicercaCorsi.getHasPrice() == true){
+           base += " WHERE c.price > 0";
+           hasWhere = true;
+       } else if(infoRicercaCorsi.getHasPrice() != null && infoRicercaCorsi.getHasPrice() == false){
+           base += " WHERE c.price = 0";
+           hasWhere = true;
        }
+
+       if (infoRicercaCorsi.getTitleLike() != null ){
+           if(hasWhere){
+               base += " AND c.title LIKE :title";
+           } else {
+               base += " WHERE c.title LIKE :title";
+               hasWhere = true;
+           }
+       }
+
+       if(infoRicercaCorsi.getCategory() != null){
+           if(hasWhere){
+               base += " AND c.category = :category";
+           } else {
+               base += " WHERE c.category = :category";
+               hasWhere = true;
+           }
+       }
+
+       if(infoRicercaCorsi.getCert() != null && infoRicercaCorsi.getCert() == true){
+           if(hasWhere) {
+               base += " AND c.certification = true";
+           } else {
+               base += " WHERE c.certification = true";
+           }
+       } else if (infoRicercaCorsi.getCert() != null && infoRicercaCorsi.getCert() == false){
+           if(hasWhere){
+               base += " AND c.certification = false";
+           }else {
+               base += " WHERE c.certification = false";
+           }
+
+       }
+
+       if(hasWhere){
+           base += " AND c.duration BETWEEN :min AND :max";
+       }else {
+           base += " WHERE c.duration BETWEEN :min AND :max";
+       }
+
         return base;
     }
 

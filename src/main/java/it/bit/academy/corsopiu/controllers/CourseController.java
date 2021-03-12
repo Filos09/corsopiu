@@ -6,6 +6,7 @@ import it.bit.academy.corsopiu.dtos.EditionModuleDto;
 import it.bit.academy.corsopiu.entities.Course;
 import it.bit.academy.corsopiu.entities.CourseEdition;
 import it.bit.academy.corsopiu.entities.Module;
+import it.bit.academy.corsopiu.repositories.CourseCustomRepository;
 import it.bit.academy.corsopiu.request.InfoRicercaCorsi;
 import it.bit.academy.corsopiu.services.abstractions.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ import java.util.stream.Collectors;
 public class CourseController {
 
     private SchedulerService schedulerService;
+
+//    @Autowired
+//    private CourseCustomRepository
 
     @Autowired
     public CourseController(SchedulerService schedulerService) {
@@ -75,8 +79,10 @@ public class CourseController {
 
     @GetMapping("/get-by-filtri")
     public ResponseEntity<Collection<CourseDto>> findCourseByFilter(@RequestBody InfoRicercaCorsi infoRicercaCorsi){
-        Collection<Course> courseCollection = schedulerService.getCourses();
+        Collection<Course> courseCollection =  schedulerService.getCourses();
+        String stringaQuery = schedulerService.createSearchString(infoRicercaCorsi);
 
+//        it.bit.academy.corsopiu.repositories.implementations
         Collection<CourseDto> dtoCollection ;
         return null;
     }

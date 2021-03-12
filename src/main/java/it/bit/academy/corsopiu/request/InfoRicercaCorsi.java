@@ -4,61 +4,66 @@ import java.util.Collection;
 
 public class InfoRicercaCorsi {
 
-    Collection<String> keywords;
-    boolean hasPrice;
-    Collection<String> categories;
-    boolean cert;
+    String titleLike;
+    Boolean hasPrice;
+    Boolean cert;
     int minDur;
     int maxDur;
+    String category;
 
     public InfoRicercaCorsi(){
 
     }
     public InfoRicercaCorsi(
-            Collection<String> keywords,
-            boolean hasPrice,
-            Collection<String> categories,
-            boolean cert,
+            String titleLike,
+            Boolean hasPrice,
+            Boolean cert,
             int minDur,
-            int maxDur) {
+            int maxDur,
+            String category) {
 
-        this.keywords = keywords;
+        this.titleLike = titleLike;
         this.hasPrice = hasPrice;
-        this.categories = categories;
         this.cert = cert;
         this.minDur = minDur;
         this.maxDur = maxDur;
+        this.category = category;
     }
 
-    public Collection<String> getKeywords() {
-        return keywords;
+
+    public String getTitleLike() {
+        return titleLike;
     }
 
-    public void setKeywords(Collection<String> keywords) {
-        this.keywords = keywords;
+    public void setTitleLike(String titleLike) {
+        this.titleLike = titleLike;
     }
 
-    public boolean getHasPrice() {
+    public Boolean getHasPrice() {
         return hasPrice;
     }
 
-    public void setHasPrice(boolean hasPrice) {
+    public void setHasPrice(Boolean hasPrice) {
         this.hasPrice = hasPrice;
     }
 
-    public Collection<String> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Collection<String> categories) {
-        this.categories = categories;
-    }
-
-    public boolean isCert() {
+    public Boolean getCert() {
         return cert;
     }
 
-    public void setCert(boolean cert) {
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Boolean isCert() {
+        return cert;
+    }
+
+    public void setCert(Boolean cert) {
         this.cert = cert;
     }
 
