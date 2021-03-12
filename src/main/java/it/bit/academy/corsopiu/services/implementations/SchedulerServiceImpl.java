@@ -8,6 +8,7 @@ import it.bit.academy.corsopiu.repositories.CourseRepository;
 import it.bit.academy.corsopiu.repositories.EditionRepository;
 import it.bit.academy.corsopiu.repositories.ModuleRepository;
 import it.bit.academy.corsopiu.repositories.PersonRepository;
+import it.bit.academy.corsopiu.request.InfoRicercaCorsi;
 import it.bit.academy.corsopiu.services.abstractions.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,6 +66,15 @@ public class SchedulerServiceImpl implements SchedulerService {
     public Optional<Person> getPersonByEmail(String email) {
         Optional<Person> person = this.personRepo.findByEmail(email);
         return person;
+    }
+
+    @Override
+    public String createSearchString(InfoRicercaCorsi infoRicercaCorsi){
+       String base = "SELECT c FROM Course c ";
+       if(infoRicercaCorsi.getHasPrice()){
+           base += "WHERE c.price > 0";
+       }
+        return base;
     }
 
 }
