@@ -23,11 +23,10 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
         String query = createSearchString(infoRicercaCorsi);
         TypedQuery<Course> customQuery = entityManager.createQuery(query,Course.class);
         customSearchParams.entrySet().forEach(kv -> customQuery.setParameter(kv.getKey(),kv.getValue()));
+        customSearchParams.entrySet().forEach(kv -> System.out.println(kv.getKey()+kv.getValue()));
+
         return customQuery.getResultList();
     }
-
-
-
 
     public String createSearchString(InfoRicercaCorsi infoRicercaCorsi){
         customSearchParams.clear();
@@ -43,17 +42,17 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
         }
 
         if (infoRicercaCorsi.getTitleLike() != null ){
-            customSearchParams.put(":title","%"+infoRicercaCorsi.getTitleLike()+"%");
+            customSearchParams.put("title","%"+infoRicercaCorsi.getTitleLike()+"%");
             if(hasWhere){
-                base += " AND c.title LIKE :title";
+                base += " AND c.name LIKE :title";
             } else {
-                base += " WHERE c.title LIKE :title";
+                base += " WHERE c.name LIKE :title";
                 hasWhere = true;
             }
         }
 
         if(infoRicercaCorsi.getCategory() != null){
-            customSearchParams.put(":category",infoRicercaCorsi.getCategory());
+            customSearchParams.put("category",infoRicercaCorsi.getCategory());
             if(hasWhere){
                 base += " AND c.category = :category";
             } else {
@@ -77,8 +76,8 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
 
         }
 
-        customSearchParams.put(":min",infoRicercaCorsi.getMinDur());
-        customSearchParams.put(":max",infoRicercaCorsi.getMaxDur());
+        customSearchParams.put("min",infoRicercaCorsi.getMinDur());
+        customSearchParams.put("max",infoRicercaCorsi.getMaxDur());
         if(hasWhere){
 
             base += " AND c.duration BETWEEN :min AND :max";

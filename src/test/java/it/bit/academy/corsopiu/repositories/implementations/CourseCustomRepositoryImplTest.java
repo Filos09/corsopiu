@@ -17,10 +17,10 @@ public class CourseCustomRepositoryImplTest {
     public static final String JPQL_ALL_COURSES= "SELECT c FROM Course c WHERE c.duration BETWEEN :min AND :max";
     public static final String JPQL_COURSE_HAS_PRICE = "SELECT c FROM Course c WHERE c.price > 0 AND c.duration BETWEEN :min AND :max";
     public static final String JPQL_COURSE_HAS_NOT_PRICE = "SELECT c FROM Course c WHERE c.price = 0 AND c.duration BETWEEN :min AND :max";
-    public static final String JPQL_COURS_HAS_PRICE_TITLE_LIKE = "SELECT c FROM Course c WHERE c.price > 0 AND c.title LIKE :title AND c.duration BETWEEN :min AND :max";
-    public static final String JPQL_COURS_HAS_PRICE_TITLE_LIKE_IN_CATEGORY = "SELECT c FROM Course c WHERE c.price > 0 AND c.title LIKE :title AND c.category = :category AND c.duration BETWEEN :min AND :max";
-    public static final String JPQL_COURS_HAS_PRICE_TITLE_LIKE_IN_CATEGORY_HAS_CERT = "SELECT c FROM Course c WHERE c.price > 0 AND c.title LIKE :title AND c.category = :category AND c.certification = true AND c.duration BETWEEN :min AND :max";
-    public static final String JPQL_COURS_HAS_PRICE_TITLE_LIKE_IN_CATEGORY_HAS_CERT_HOUR = "SELECT c FROM Course c WHERE c.price > 0 AND c.title LIKE :title AND c.category = :category AND c.certification = true AND c.duration BETWEEN :min AND :max";
+    public static final String JPQL_COURS_HAS_PRICE_TITLE_LIKE = "SELECT c FROM Course c WHERE c.price > 0 AND c.name LIKE :title AND c.duration BETWEEN :min AND :max";
+    public static final String JPQL_COURS_HAS_PRICE_TITLE_LIKE_IN_CATEGORY = "SELECT c FROM Course c WHERE c.price > 0 AND c.name LIKE :title AND c.category = :category AND c.duration BETWEEN :min AND :max";
+    public static final String JPQL_COURS_HAS_PRICE_TITLE_LIKE_IN_CATEGORY_HAS_CERT = "SELECT c FROM Course c WHERE c.price > 0 AND c.name LIKE :title AND c.category = :category AND c.certification = true AND c.duration BETWEEN :min AND :max";
+    public static final String JPQL_COURS_HAS_PRICE_TITLE_LIKE_IN_CATEGORY_HAS_CERT_HOUR = "SELECT c FROM Course c WHERE c.price > 0 AND c.name LIKE :title AND c.category = :category AND c.certification = true AND c.duration BETWEEN :min AND :max";
 
     @Autowired
     private CourseRepository courseRepository;
@@ -66,7 +66,7 @@ public class CourseCustomRepositoryImplTest {
         assertEquals(JPQL_COURS_HAS_PRICE_TITLE_LIKE,query);
         Map<String,Object> params = courseRepository.getCustomSearchParams();
         assertEquals(3,params.size());
-        assertEquals("%Java%",params.get(":title"));
+        assertEquals("%Java%",params.get("title"));
     }
 
     @Test
@@ -79,8 +79,8 @@ public class CourseCustomRepositoryImplTest {
         assertEquals(JPQL_COURS_HAS_PRICE_TITLE_LIKE_IN_CATEGORY,query);
         Map<String,Object> params = courseRepository.getCustomSearchParams();
         assertEquals(4,params.size());
-        assertEquals("%JavaScript%",params.get(":title"));
-        assertEquals("Angular",params.get(":category"));
+        assertEquals("%JavaScript%",params.get("title"));
+        assertEquals("Angular",params.get("category"));
     }
 
     @Test
@@ -94,8 +94,8 @@ public class CourseCustomRepositoryImplTest {
         assertEquals(JPQL_COURS_HAS_PRICE_TITLE_LIKE_IN_CATEGORY_HAS_CERT,query);
         Map<String, Object> params = courseRepository.getCustomSearchParams();
         assertEquals(4,params.size());
-        assertEquals("%JavaScript%",params.get(":title"));
-        assertEquals("Angular",params.get(":category"));
+        assertEquals("%JavaScript%",params.get("title"));
+        assertEquals("Angular",params.get("category"));
     }
 
     @Test
@@ -111,10 +111,10 @@ public class CourseCustomRepositoryImplTest {
         assertEquals(JPQL_COURS_HAS_PRICE_TITLE_LIKE_IN_CATEGORY_HAS_CERT_HOUR,query);
         Map<String,Object>params = courseRepository.getCustomSearchParams();
         assertEquals(4,params.size());
-        assertEquals("%JavaScript%",params.get(":title"));
-        assertEquals("Angular",params.get(":category"));
-        assertEquals(100,params.get(":min"));
-        assertEquals(600,params.get(":max"));
+        assertEquals("%JavaScript%",params.get("title"));
+        assertEquals("Angular",params.get("category"));
+        assertEquals(100,params.get("min"));
+        assertEquals(600,params.get("max"));
     }
 
 }

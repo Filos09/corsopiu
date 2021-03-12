@@ -7,6 +7,7 @@ import it.bit.academy.corsopiu.entities.Person;
 import it.bit.academy.corsopiu.request.InfoRicercaCorsi;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface SchedulerService {
@@ -17,7 +18,5 @@ public interface SchedulerService {
     Collection<Module>getModules(long id);
 
     Optional<Person> getPersonByEmail(String email);
-
-//    Collection<Course>
-    String createSearchString(InfoRicercaCorsi infoRicercaCorsi);
+    List<Course> customSearch(InfoRicercaCorsi infoRicercaCorsi);
     }
