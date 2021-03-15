@@ -1,13 +1,9 @@
 package it.bit.academy.corsopiu.services.implementations;
 
-import it.bit.academy.corsopiu.entities.Course;
-import it.bit.academy.corsopiu.entities.CourseEdition;
+import it.bit.academy.corsopiu.dtos.ApplicationPersonDto;
+import it.bit.academy.corsopiu.entities.*;
 import it.bit.academy.corsopiu.entities.Module;
-import it.bit.academy.corsopiu.entities.Person;
-import it.bit.academy.corsopiu.repositories.CourseRepository;
-import it.bit.academy.corsopiu.repositories.EditionRepository;
-import it.bit.academy.corsopiu.repositories.ModuleRepository;
-import it.bit.academy.corsopiu.repositories.PersonRepository;
+import it.bit.academy.corsopiu.repositories.*;
 import it.bit.academy.corsopiu.request.InfoRicercaCorsi;
 import it.bit.academy.corsopiu.services.abstractions.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +24,19 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     private PersonRepository personRepo;
 
+    private ApplicationRepository applicationRepo;
+
     @Autowired
     public SchedulerServiceImpl(CourseRepository courseRepo,
                                 EditionRepository editionRepo,
                                 ModuleRepository moduleRepo,
-                                PersonRepository personRepo) {
+                                PersonRepository personRepo,
+                                ApplicationRepository applicationRepo) {
         this.courseRepo = courseRepo;
         this.editionRepo = editionRepo;
         this.moduleRepo = moduleRepo;
         this.personRepo = personRepo;
+        this.applicationRepo = applicationRepo;
     }
 
     @Override
@@ -72,6 +72,18 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public List<Course> customSearch(InfoRicercaCorsi infoRicercaCorsi) {
         return courseRepo.customSearch(infoRicercaCorsi);
+    }
+
+//    @Override
+//    public Collection<ApplicationPersonDto> getApplicationCollections(long id) {
+//        Collection<ApplicationPersonDto> applications = this.personRepo.fuggivia(id);
+//        return applications;
+//    }
+
+    @Override
+    public Collection<Application> getByEditionId(long id) {
+        Collection<Application> applications = this.applicationRepo.findByEditionId(id);
+        return applications;
     }
 
 }

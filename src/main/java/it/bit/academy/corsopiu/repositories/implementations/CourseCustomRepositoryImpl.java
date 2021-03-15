@@ -66,12 +66,14 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
                 base += " AND c.certification = true";
             } else {
                 base += " WHERE c.certification = true";
+                hasWhere = true;
             }
         } else if (infoRicercaCorsi.getCert() != null && infoRicercaCorsi.getCert() == false){
             if(hasWhere){
                 base += " AND c.certification = false";
             }else {
                 base += " WHERE c.certification = false";
+                hasWhere = true;
             }
 
         }
@@ -79,10 +81,10 @@ public class CourseCustomRepositoryImpl implements CourseCustomRepository {
         customSearchParams.put("min",infoRicercaCorsi.getMinDur());
         customSearchParams.put("max",infoRicercaCorsi.getMaxDur());
         if(hasWhere){
-
             base += " AND c.duration BETWEEN :min AND :max";
         }else {
             base += " WHERE c.duration BETWEEN :min AND :max";
+            hasWhere = true;
         }
 
         return base;

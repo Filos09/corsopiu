@@ -1,8 +1,10 @@
 package it.bit.academy.corsopiu.controllers;
 
+import it.bit.academy.corsopiu.dtos.ApplicationPersonDto;
 import it.bit.academy.corsopiu.dtos.CourseDto;
 import it.bit.academy.corsopiu.dtos.CourseEditionDto;
 import it.bit.academy.corsopiu.dtos.EditionModuleDto;
+import it.bit.academy.corsopiu.entities.Application;
 import it.bit.academy.corsopiu.entities.Course;
 import it.bit.academy.corsopiu.entities.CourseEdition;
 import it.bit.academy.corsopiu.entities.Module;
@@ -82,7 +84,10 @@ public class CourseController {
     public ResponseEntity<Collection<CourseDto>> findCourseByFilter(@RequestBody InfoRicercaCorsi infoRicercaCorsi){
         List<Course> listaCorsi = schedulerService.customSearch(infoRicercaCorsi);
         List<CourseDto> listaCorsiDto = listaCorsi.stream().map(CourseDto::new).collect(Collectors.toList());
+        System.out.println(listaCorsiDto);
         return new ResponseEntity<>(listaCorsiDto, HttpStatus.OK);
     }
+
+
 
 }
