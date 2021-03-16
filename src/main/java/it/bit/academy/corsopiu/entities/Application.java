@@ -28,6 +28,8 @@ public class Application {
     @JoinColumn(name = "student_id")
     private Student student;
 
+
+
     public long getId() {
         return id;
     }

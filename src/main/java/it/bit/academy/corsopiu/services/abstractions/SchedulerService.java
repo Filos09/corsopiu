@@ -3,6 +3,7 @@ package it.bit.academy.corsopiu.services.abstractions;
 import it.bit.academy.corsopiu.dtos.ApplicationPersonDto;
 import it.bit.academy.corsopiu.entities.*;
 import it.bit.academy.corsopiu.entities.Module;
+import it.bit.academy.corsopiu.models.StudentSearchInfo;
 import it.bit.academy.corsopiu.request.InfoRicercaCorsi;
 
 import java.util.Collection;
@@ -13,6 +14,7 @@ public interface SchedulerService {
 
     Collection<Course> getCourses();
     Optional<Course> getCourseById(long id);
+    Optional<CourseEdition> getCourseEditionById(long id);
     Collection<CourseEdition> getCourseEditions(long id);
     Collection<Module>getModules(long id);
 
@@ -22,4 +24,8 @@ public interface SchedulerService {
 //    Collection<ApplicationPersonDto> getApplicationCollections(long id);
 
     Collection<Application> getByEditionId(long id);
-    }
+
+
+    Collection<Student> searchStudents(StudentSearchInfo studentSearchInfo);
+    Application insertApplication(Application application);
+}

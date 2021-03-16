@@ -9,4 +9,5 @@ import java.util.Collection;
 public interface ApplicationRepository extends CrudRepository<Application, Long> {
 
     Collection<Application> findByEditionId(long id);
+
 }

@@ -38,10 +38,12 @@ public class PersonDto {
         this.birthDate = p.getBirthDate();
         this.birthPlace = p.getBirthPlace();
         this.fiscalCode = p.getFiscalCode();
-        this.streetAddress = p.getAddress().getStreetAddress();
-        this.city = p.getAddress().getCity();
-        this.province = p.getAddress().getProvince();
-        this.region = p.getAddress().getRegion();
+        if(p.getAddress() != null){
+            this.streetAddress = p.getAddress().getStreetAddress();
+            this.city = p.getAddress().getCity();
+            this.province = p.getAddress().getProvince();
+            this.region = p.getAddress().getRegion();
+        }
         this.skills = p.getSkills().stream().map(SkillDto::new).collect(Collectors.toList());
 
         if(p instanceof Employee){

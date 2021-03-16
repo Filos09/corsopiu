@@ -3,6 +3,7 @@ package it.bit.academy.corsopiu.services.implementations;
 import it.bit.academy.corsopiu.dtos.ApplicationPersonDto;
 import it.bit.academy.corsopiu.entities.*;
 import it.bit.academy.corsopiu.entities.Module;
+import it.bit.academy.corsopiu.models.StudentSearchInfo;
 import it.bit.academy.corsopiu.repositories.*;
 import it.bit.academy.corsopiu.request.InfoRicercaCorsi;
 import it.bit.academy.corsopiu.services.abstractions.SchedulerService;
@@ -26,17 +27,21 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     private ApplicationRepository applicationRepo;
 
+    private StudentRepository studentRepo;
+
     @Autowired
     public SchedulerServiceImpl(CourseRepository courseRepo,
                                 EditionRepository editionRepo,
                                 ModuleRepository moduleRepo,
                                 PersonRepository personRepo,
-                                ApplicationRepository applicationRepo) {
+                                ApplicationRepository applicationRepo,
+                                StudentRepository studentCustomRepo) {
         this.courseRepo = courseRepo;
         this.editionRepo = editionRepo;
         this.moduleRepo = moduleRepo;
         this.personRepo = personRepo;
         this.applicationRepo = applicationRepo;
+        this.studentRepo =  studentCustomRepo;
     }
 
     @Override
@@ -48,6 +53,11 @@ public class SchedulerServiceImpl implements SchedulerService {
     public Optional<Course> getCourseById(long id) {
         Optional<Course> course = this.courseRepo.findById(id);
         return course;
+    }
+
+    @Override
+    public Optional<CourseEdition> getCourseEditionById(long id) {
+        return this.editionRepo.findById(id);
     }
 
     @Override
@@ -84,6 +94,17 @@ public class SchedulerServiceImpl implements SchedulerService {
     public Collection<Application> getByEditionId(long id) {
         Collection<Application> applications = this.applicationRepo.findByEditionId(id);
         return applications;
+    }
+
+    @Override
+    public Collection<Student> searchStudents(StudentSearchInfo studentSearchInfo) {
+        Collection<Student> students = this.studentRepo.customSearch(studentSearchInfo);
+        return students;
+    }
+
+    @Override
+    public Application insertApplication(Application application) {
+        return this.applicationRepo.save(application);
     }
 
 }
